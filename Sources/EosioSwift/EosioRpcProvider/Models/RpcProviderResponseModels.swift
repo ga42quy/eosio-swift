@@ -366,6 +366,11 @@ public struct PermissionLevelWeight: Decodable {
 public struct KeyWeight: Decodable {
     public var key: String
     public var weight: EosioUInt64
+    
+    public init(key: String, weight: EosioUInt64) {
+        self.key = key
+        self.weight = weight
+    }
 
     enum CodingKeys: String, CodingKey {
         case key
@@ -379,6 +384,16 @@ public struct Authority: Decodable {
     public var keys: [KeyWeight]
     public var waits: [WaitWeight]
     public var accounts: [PermissionLevelWeight]
+    
+    public init(threshold: EosioUInt64,
+        keys: [KeyWeight],
+        waits: [WaitWeight],
+        accounts: [PermissionLevelWeight]) {
+        self.accounts = accounts
+        self.threshold = threshold
+        self.waits = waits
+        self.keys = keys
+    }
 
     enum CodingKeys: String, CodingKey {
         case threshold
